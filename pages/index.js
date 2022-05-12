@@ -6,9 +6,9 @@ import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
 
-export default function Home(props) {
-  console.log("Props ", props);
+import { getAllPostsByFrontMatter } from "../lib/getAllPostsByFrontmatter";
 
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,26 +23,9 @@ export default function Home(props) {
 }
 
 export async function getStaticProps(context) {
-  console.log("hello world");
+  const posts = await getAllPostsByFrontMatter("blog");
 
-  const POSTS_PATH = path.join(process.cwd(), "pages", "posts");
+  console.log("Posts ", posts);
 
-  const postFilePaths = fs
-    .readdirSync(POSTS_PATH)
-    // Only include md(x) files
-    .filter((path) => /\.mdx?$/.test(path));
-
-  const posts = postFilePaths.map((filePath) => {
-    const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
-    const { data: meta } = matter(source);
-
-    const url = `/posts/${filePath.split(".")}`;
-
-    return {
-      meta,
-      url,
-    };
-  });
-
-  return { props: { posts } };
+  return { props: {} };
 }
