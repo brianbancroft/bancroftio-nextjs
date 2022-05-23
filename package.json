@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-photos": " cp -i ./posts/photos/*.webp ./public"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.1.1",
