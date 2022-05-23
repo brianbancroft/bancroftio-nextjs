@@ -7,7 +7,7 @@ function Footer() {
 
   return (
     <>
-      <footer className="absolute bottom-0 w-full ">
+      <footer className="bottom-0 w-full fixed bg-white">
         <div className="flex justify-around max-w-prose mx-auto">
           <Link href="/">
             <a className={`text-2xl py-2 ${route === "/" ? "underline" : ""}`}>
