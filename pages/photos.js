@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 
 import { getAllPostsByFrontMatter } from "../lib/getAllPostsByFrontmatter";
 
@@ -14,22 +15,25 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="pt-4">
-        <ul>
-          {posts.map((post) => (
-            <Link
-              href={`/posts/writing/${post.slug}`}
-              key={`${post.frontMatter.title}-${post.frontMatter.date}`}
-            >
-              <a className="w-full">
-                <div className="flex justify-between  max-w-prose px-2 mx-auto">
-                  <div className="">{post.frontMatter.title}</div>
-                  <div className="">{post.frontMatter.date}</div>
-                </div>
-              </a>
-            </Link>
-          ))}
-        </ul>
+      <main className="pt-4 max-w-prose px-2 mx-auto grid grid-cols-3 gap-1">
+        {posts.map((post) => (
+          <Link
+            href={`/posts/photos/${post.slug}`}
+            key={`${post.frontMatter.title}-${post.frontMatter.date}`}
+          >
+            <a className="">
+              <div className="">
+                <Image
+                  src={`/${post.frontMatter.file}`}
+                  width="200"
+                  height="200"
+                  alt={post.frontMatter.title}
+                  layout="intrinsic"
+                />
+              </div>
+            </a>
+          </Link>
+        ))}
       </main>
     </>
   );
