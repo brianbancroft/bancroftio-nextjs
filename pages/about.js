@@ -1,6 +1,5 @@
 import Head from "next/head";
 
-import Image from "next/image";
 import portrait from "../assets/portrait.webp";
 
 export default function AboutPage() {
@@ -67,7 +66,7 @@ export default function AboutPage() {
           </div>
 
           <figure>
-            <Image
+            <img
               src={portrait}
               alt="Portrait of Brian"
               width={300}

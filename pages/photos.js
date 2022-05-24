@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 import { getAllPostsByFrontMatter } from "../lib/getAllPostsByFrontmatter";
 
@@ -23,7 +22,7 @@ export default function Home(props) {
           >
             <a className="">
               <div className="">
-                <Image
+                <img
                   src={`/${post.frontMatter.file}`}
                   width="200"
                   height="200"

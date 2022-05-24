@@ -38,7 +38,7 @@ export async function getStaticProps(context) {
   if (!postId) throw new Error("Unknown path");
 
   const { frontMatter: metadata, markdownBody: body } = await getPostBySlug(
-    "writing",
+    "snippets",
     postId
   );
 
@@ -48,12 +48,14 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const postId = await (
+  const paths = await (
     await getAllPostsByFrontMatter("snippets")
-  ).map((i) => i.slug);
+  ).map((i) => {
+    return { params: { postId: [i.slug] } };
+  });
 
   return {
-    paths: [{ params: { postId } }],
+    paths,
     fallback: true, // false or 'blocking'
   };
 }

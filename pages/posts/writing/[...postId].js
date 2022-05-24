@@ -48,12 +48,16 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const postId = await (
+  const paths = await (
     await getAllPostsByFrontMatter("writing")
-  ).map((i) => i.slug);
+  ).map((i) => {
+    return { params: { postId: [i.slug] } };
+  });
+
+  // console.log("Paths ", paths);
 
   return {
-    paths: [{ params: { postId } }],
+    paths,
     fallback: true, // false or 'blocking'
   };
 }
