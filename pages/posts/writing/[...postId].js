@@ -4,6 +4,8 @@ import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
+import SyntaxHighlighter from "../../../components/SyntaxHighlighter";
+
 import { getAllPostsByFrontMatter } from "../../../lib/getAllPostsByFrontmatter";
 import { getPostBySlug } from "../../../lib/getPostBySlug";
 
@@ -12,7 +14,9 @@ function BlogPost(props) {
 
   if (!props.loaded) return <>loading</>;
 
-  const components = {};
+  const components = {
+    pre: (stuff) => <SyntaxHighlighter {...stuff} />,
+  };
 
   return (
     <>
