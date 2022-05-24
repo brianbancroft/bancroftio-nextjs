@@ -1,11 +1,18 @@
 import React from "react";
 import Head from "next/head";
 
+import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+
 import { getAllPostsByFrontMatter } from "../../../lib/getAllPostsByFrontmatter";
 import { getPostBySlug } from "../../../lib/getPostBySlug";
 
 function BlogPost(props) {
-  const { metadata, body } = props;
+  const { metadata, source, loaded } = props;
+
+  if (!props.loaded) return <>loading</>;
+
+  const components = {};
 
   return (
     <>
@@ -14,7 +21,9 @@ function BlogPost(props) {
         <meta name="description" content="Blog, CV, Aide Memoire." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>Blog Post!</div>
+      <article className="prose p-4">
+        <MDXRemote {...source} components={components} />
+      </article>
     </>
   );
 }
@@ -29,7 +38,9 @@ export async function getStaticProps(context) {
     postId
   );
 
-  return { props: { metadata, body } };
+  const source = await serialize(body);
+
+  return { props: { metadata, source, loaded: true } };
 }
 
 export async function getStaticPaths() {
