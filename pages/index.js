@@ -14,7 +14,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="px-2 mb-4">
+      <main className="px-2 mb-4 mt-1">
         <ul>
           {posts.map((post) => (
             <Link
@@ -22,12 +22,11 @@ export default function Home(props) {
               key={`${post.frontMatter.title}-${post.frontMatter.date}`}
             >
               <a className="w-full">
-                <div className="flex justify-between  max-w-prose px-2 mx-auto">
+                <div className="flex justify-between  max-w-prose px-2 mx-auto mb-2">
                   <div className="">{post.frontMatter.title}</div>
-                  <div className="">{post.frontMatter.date}</div>
-                </div>
-                <div className="max-w-prose flex justify-end mx-auto text-slate-500 italic">
-                  <p className="text-xs">{post.frontMatter.tags}</p>
+                  <div className="italic text-slate-600">
+                    {post.frontMatter.date}
+                  </div>
                 </div>
               </a>
             </Link>
