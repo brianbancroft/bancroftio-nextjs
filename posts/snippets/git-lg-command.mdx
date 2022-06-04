@@ -1,0 +1,25 @@
+---
+title: Colourized Git Log
+date: 12-05-2022
+image: '/snippet-thumbnails/git-lg-command.png'
+type: 'snippet'
+
+---
+
+# A Better Git Log
+
+The following alias will provide a visual git log command that provides as much insight as most visual programs:
+
+![Sample Image](/snippet-thumbnails/git-lg-command.png)
+
+Open up your ~/.gitconfig file with your preferred code editor and add the second line under the `[alias]` heading. 
+
+```sh
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+
+```
+
+
+
