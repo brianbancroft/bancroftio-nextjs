@@ -14,7 +14,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="pt-4 max-w-prose px-2 mx-auto grid grid-cols-3 gap-1">
+      <main className="max-w-prose px-2 mx-auto grid grid-cols-3 gap-1">
         {posts.map((post) => (
           <Link
             href={`/posts/photos/${post.slug}`}
