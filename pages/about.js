@@ -32,7 +32,7 @@ export default function AboutPage() {
         <section className="grid grid-cols-1 gap-2 md:grid-cols-2 my-8">
           <div>
             <h2 className="text-xl my-2">Social Media</h2>
-            <ul>
+            <ul className="list-disc">
               <li>
                 <a
                   href="https://www.linkedin.com/in/brianbancroft/"
@@ -41,6 +41,17 @@ export default function AboutPage() {
                   className="hover:underline"
                 >
                   Linkedin
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://github.com/brianbancroft"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Github
                 </a>
               </li>
               <li>
