@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { getAllPostsByFrontMatter } from "../lib/getAllPostsByFrontmatter";
 
 const SampleIcon = () => (
   <div className="relative z-30 bg-gray-700/50 justify-end flex py-2 pr-2">
@@ -39,51 +40,14 @@ const ProjectIcon = () => (
   </div>
 );
 
-const items = [
-  {
-    title: "Doing stuff with JavaScript",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-  {
-    title: "Doing stuff with this other language",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-  {
-    title: "Doing stuff with this other language",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-  {
-    title: "Doing stuff with this other language",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-  {
-    title: "Doing stuff with this other language",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-  {
-    title: "Doing stuff with this other language",
-    type: "sample",
-    url: "#",
-  },
-  { title: "Doing stuff with this other language", type: "project", url: "#" },
-];
+function SnippetsPage(props) {
+  const { snippets } = props;
 
-function snippets() {
   return (
     <section className=" max-w-prose">
       <div className="grid grid-cols-2 gap-2">
-        {items.map(({ title, type, url }) => (
-          <Link href={url} key={title}>
+        {snippets.map(({ frontMatter: { title, image, type }, slug }) => (
+          <Link href={`/posts/snippets/${slug}`} key={slug}>
             <a className="border border-slate-800">
               <figure>
                 <div className="h-0">
@@ -92,7 +56,7 @@ function snippets() {
 
                 {/* next/image does not support ssg well */}
                 <img // eslint-disable-line
-                  src={`http://placekitten.com/300/200`}
+                  src={image}
                   className="w-full"
                 />
                 <figcaption>{title}</figcaption>
@@ -105,4 +69,10 @@ function snippets() {
   );
 }
 
-export default snippets;
+export async function getStaticProps() {
+  const snippets = await getAllPostsByFrontMatter("snippets");
+
+  return { props: { snippets } };
+}
+
+export default SnippetsPage;
