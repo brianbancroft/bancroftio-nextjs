@@ -1,0 +1,94 @@
+---
+title: Mapbox GL JS Certification Alpha
+date: 21-08-2020
+image: '/snippet-thumbnails/mapbox-gl-js-cert.png'
+type: 'project'
+
+---
+
+# Mapbox GL JS Certification
+
+
+[Live site](https://vehicle-tracker.netlify.app/)
+
+![](/snippet-thumbnails/mapbox-gl-js-cert.png)
+
+This is a submission for the Mapbox partner training program. It's a hasty UI that tracks "simulated" vehicles using a polling system.
+
+## UI and Codebase
+
+[Repo](https://github.com/brianbancroft/certification-example-mapbox-gl-js)
+
+This is a hasty app that uses create-react-app's React framework, along with react-redux and grommet.
+
+The UI is hosted on Netlify, and uses Netlify Functions to create a API that acts as an external source of truth. I chose this hosting because it's free. I like free.
+
+## API - Explanation
+
+There was no hard specification or reasoning behind what external data source one is to use in this certification. Because I like to work with people in the frontier who are less-established, it means that I would work likely with ad-hoc setups. As a result, it made a lot of sense to model a scenario based on a sample work crew around the Oilsands region.
+
+Registering work crews actually generates a seed that feeds parametric function. Polling has the server calculate the new position based on a function of time for the same parametric curve.
+
+Often, there might be a socket setup for two-way text communications over radio. But because of time limitations, I had no interest in setting up a push notification for crew messages. This can be done, but for now, I generate sample messages using an API endpoint.
+
+## Client - Mapbox Setup
+
+For this part, I started with my own poorly-written but oddly-useful React Hooks example in the Sparkgeo Blog (link). What surprised me was that I written it exactly the way I like to read tutorials: The TL;DR and the text once I get it working. And this time, the TL;DR just worked fine.
+
+## The Criteria
+
+Mapbox was kind enough to provide criteria. Here, let me break down how I interpreted the criteria and built the app.
+
+### Map should have a custom (non-default) styleThere are two styles for this site.
+
+For this site, I ended up using a style (which is public) that you can find at 'mapbox://styles/brianbancroft/ck2r23wm408me1csue4nbr8zq'. I believe it's a close copy of a terrain map from the gallery. The big thing is that it's a custom style that I had lying around from sometime in the past, as opposed to something that was branded to a general mapbox style.
+
+![](/snippet-thumbnails/cert-post-basemap.png)
+
+I chose this style for its plain aesthetic that emphasizes terrain over cover. Truth is that I would use this for all zoom levels, as in a working environment, the satellite cover is never as reliable from year-to-year. Cut lines, and nature's swift reclamation are a fact of life beyond the roads.
+
+### Map should present a series of points, updating in real-time
+
+![](/snippet-thumbnails/real-time-points.png)
+
+These points update every n seconds through push-polling (where the client asks the server for an update). Thanks to how little lambda functions cost, it is very inexpensive to create a server that returns a position on a parametric curve for a seed that is unique to the vehicle.
+
+### Hovering over a point should change a visual attribute (size, colour, etc)
+
+As you can see in the screencap in the last section, hovering over the point (or card) will change the border on both the border as well as the card.
+
+### Hovering over a point should create a popup
+
+![](/snippet-thumbnails/cert-post-popup.png)
+
+Popups should contain data from an external source AND properties of the point
+
+### Popups should contain data from an external source AND properties of the point
+
+I chose a single property from the source as a demonstration that it could be done: The crew callsign.
+
+The popup also contains the message type as well as the message content, which is retrieved through an API request that seeks the latest status from a given callsign. By definition, APIs living on some server are external to a client.
+
+![](/snippet-thumbnails/cert-status.png)
+
+### Map should be searchable
+
+This term, loaded with ambiguity means "the settings should be set to public for this to be seen by our experts". So, public-facing. So if you can see this, you should be good.
+
+### Map should center on click
+
+Try it. It will center.
+
+### Clicking on point should add an HTML marker
+
+Clicking on any point of the map will add both an HTML marker, as well as a copy mechanism that allows you to share the latlong of that particular point that copies the location to your clipboard.
+
+### Points should be filterable based on properties (through some kind UI)
+
+Points are filterable on the right-hand side. This will grey out points that are not of interest, as well as hide cards that are of no use.
+
+
+### Map should switch to satellite imagery as user zooms
+
+Yuck. So yes it does just that. Personally, I'm more of a fan of a toggle, as there are times a abstraction is better than the whole raster...
+
