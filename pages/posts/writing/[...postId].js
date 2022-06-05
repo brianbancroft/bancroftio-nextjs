@@ -25,7 +25,7 @@ function BlogPost(props) {
         <meta name="description" content="Blog, CV, Aide Memoire." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <article className="prose prose-slate pb-16 mx-auto">
+      <article className="prose prose-slate pb-16 pt-2 px-2 md:pt-0 md:px-0 mx-auto">
         <MDXRemote {...source} components={components} />
       </article>
     </>

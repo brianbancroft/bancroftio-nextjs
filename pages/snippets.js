@@ -49,7 +49,7 @@ function SnippetsPage(props) {
         {snippets.map(({ frontMatter: { title, image, type }, slug }) => (
           <Link href={`/posts/snippets/${slug}`} key={slug}>
             <a className="border border-slate-800">
-              <figure>
+              <figure className="">
                 <div className="h-0">
                   {type === "project" ? <ProjectIcon /> : <SampleIcon />}
                 </div>
@@ -59,7 +59,7 @@ function SnippetsPage(props) {
                   src={image}
                   className="w-full"
                 />
-                <figcaption>{title}</figcaption>
+                <figcaption className="pl-1">{title}</figcaption>
               </figure>
             </a>
           </Link>

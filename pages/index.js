@@ -14,7 +14,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="px-2 mb-4 mt-1">
+      <main className="px-2 mb-4 mt-4 md:mt-1">
         <ul>
           {posts.map((post) => (
             <Link
