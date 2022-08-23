@@ -24,7 +24,7 @@ export default function AboutPage() {
         </p>
 
         <p className="my-2">
-          I spent a lot of my engergy on frontend testing. I still find it as a
+          I spent a lot of my energy on frontend testing. I still find it as a
           discipline to be both flimsy and needed as our applications become
           increasingly complex.
         </p>
