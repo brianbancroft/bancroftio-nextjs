@@ -106,7 +106,7 @@ export default function AboutPage() {
 
           <figure>
             <img
-              src="/portrait.webp"
+              src="/photos/portrait.webp"
               alt="Portrait of Brian"
               width={300}
               height={450}

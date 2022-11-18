@@ -4,10 +4,10 @@ import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
-import SyntaxHighlighter from "../../../components/SyntaxHighlighter";
+import SyntaxHighlighter from "../../components/SyntaxHighlighter";
 
-import { getAllPostsByFrontMatter } from "../../../lib/getAllPostsByFrontmatter";
-import { getPostBySlug } from "../../../lib/getPostBySlug";
+import { getAllPostsByFrontMatter } from "../../lib/getAllPostsByFrontmatter";
+import { getPostBySlug } from "../../lib/getPostBySlug";
 
 function BlogPost(props) {
   const { metadata, source, loaded } = props;
@@ -38,7 +38,7 @@ export async function getStaticProps(context) {
   if (!postId) throw new Error("Unknown path");
 
   const { frontMatter: metadata, markdownBody: body } = await getPostBySlug(
-    "photos",
+    "snippets",
     postId
   );
 
@@ -49,12 +49,10 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const paths = await (
-    await getAllPostsByFrontMatter("photos")
+    await getAllPostsByFrontMatter("snippets")
   ).map((i) => {
     return { params: { postId: [i.slug] } };
   });
-
-  // console.log("Paths ", paths);
 
   return {
     paths,

@@ -47,7 +47,7 @@ function SnippetsPage(props) {
     <section className=" max-w-prose">
       <div className="grid grid-cols-2 gap-2">
         {snippets.map(({ frontMatter: { title, image, type }, slug }) => (
-          <Link href={`/posts/snippets/${slug}`} key={slug}>
+          <Link href={`/snippets/${slug}`} key={slug}>
             <a className="border border-slate-800">
               <figure className="">
                 <div className="h-0">

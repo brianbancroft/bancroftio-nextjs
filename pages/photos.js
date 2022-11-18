@@ -17,7 +17,7 @@ export default function Home(props) {
       <main className="max-w-prose px-2 mx-auto grid grid-cols-3 gap-1">
         {posts.map((post) => (
           <Link
-            href={`/posts/photos/${post.slug}`}
+            href={`/photos/${post.slug}`}
             key={`${post.frontMatter.title}-${post.frontMatter.date}`}
           >
             <a className="">

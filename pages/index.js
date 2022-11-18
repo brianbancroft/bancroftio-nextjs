@@ -18,7 +18,7 @@ export default function Home(props) {
         <ul>
           {posts.map((post) => (
             <Link
-              href={`/posts/writing/${post.slug}`}
+              href={`/writing/${post.slug}`}
               key={`${post.frontMatter.title}-${post.frontMatter.date}`}
             >
               <a className="w-full">
