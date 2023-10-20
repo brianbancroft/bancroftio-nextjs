@@ -44,7 +44,7 @@ function SnippetsPage(props) {
   const { snippets } = props;
 
   return (
-    <section className=" max-w-prose">
+    <section className="mx-auto max-w-prose">
       <div className="grid grid-cols-2 gap-2">
         {snippets.map(({ frontMatter: { title, image, type }, slug }) => (
           <Link href={`/snippets/${slug}`} key={slug}>
